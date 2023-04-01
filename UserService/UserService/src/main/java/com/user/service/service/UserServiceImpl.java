@@ -1,6 +1,7 @@
 package com.user.service.service;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.user.service.entities.Hotel;
 import com.user.service.entities.Rating;
 import com.user.service.entities.User;
-import com.user.service.externalService.HotelService;
+
 import com.user.service.repositories.UserRepository;
 
 import exceptions.ResourceNotFoundException;
@@ -25,8 +26,7 @@ public class UserServiceImpl implements UserService
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@Autowired
-	private HotelService hotelservice;
+	
 	
 	
 	@Override
@@ -66,8 +66,8 @@ public class UserServiceImpl implements UserService
 		user.setRatings(ratings);
 		for(Rating r : ratings)
 		{
-			//Hotel hotel = restTemplate.getForObject("http://HOTEL-SERVICE/api/hotel/"+r.getHotelId(), Hotel.class);
-			Hotel hotel = hotelservice.getHotel(r.getHotelId());
+			Hotel hotel = restTemplate.getForObject("http://HOTEL-SERVICE/api/hotel/"+r.getHotelId(), Hotel.class);
+			//Hotel hotel = hotelservice.getHotel(r.getHotelId());
 			r.setHotel(hotel);
 		}
 		return user;
