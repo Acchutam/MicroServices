@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService
 			{
 				Hotel hotel = restTemplate.getForObject("http://HOTEL-SERVICE/api/hotel/"+r.getHotelId(), Hotel.class);
 				r.setHotel(hotel);
+				
 			}
 		}
 		
